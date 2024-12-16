@@ -16,13 +16,13 @@
 </table>
 
 ## 📖 Table of Contents
-1. 📜 [Prerequisites](#prerequisites)
-2. 🖥️ [Environment Setup](#environment-setup)
-3. 💳 [Wallet Configuration](#wallet-configuration)
-4. 🚀 [Compilation and Deployment](#compilation-and-deployment)
-5. 🕵🏻 [Testing and Execution](#testing-and-execution)
-6. 🩺 [Troubleshooting](#troubleshooting)
-7. 🔩 [Practical Example](#practical-example)
+1. 📜 [Prerequisites](#-prerequisites)
+2. 🖥️ [Environment Setup](#environment-setup-️-)
+3. 💳 [Wallet Configuration](#wallet-configuration--)
+4. 🚀 [Compilation and Deployment](#compilation-and-deployment--)
+5. 🕵🏻 [Testing and Execution](#testing-and-execution-)
+6. 🩺 [Troubleshooting](#troubleshooting-)
+7. 🔩 [Practical Example](#practical-example-)
 
 ## 📝 Prerequisites
    Before getting started, make sure you have the following installed on your system:
