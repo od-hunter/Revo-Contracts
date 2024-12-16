@@ -103,7 +103,7 @@ This command will deploy the contract to the testnet and return the contract's a
 - Assume the following values:
   - <wasm_hash>: ./target/wasm32-unknown-unknown/release/stellar_smart_contract.wasm \
   - <source_account>: GBZXN7PIRZGNWCXXFYU7KYWXX4BXZUYHZO5QUEMKRHLUVLYN53WVFG3E
-  - <network>: testnet
+  -  <network> : testnet
 
 ```bash   
 stellar contract deploy \
