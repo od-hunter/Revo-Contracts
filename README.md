@@ -21,8 +21,9 @@
 3. 💳 [Wallet Configuration](#wallet-configuration--)
 4. 🚀 [Compilation and Deployment](#compilation-and-deployment--)
 5. 🕵🏻 [Testing and Execution](#testing-and-execution-)
-6. 🩺 [Troubleshooting](#troubleshooting-)
-7. 🔩 [Practical Example](#practical-example-)
+6. 🔩 [Practical Example](#practical-example-)
+7. 🩺 [Troubleshooting](#troubleshooting-)
+
 
 ## 📝 Prerequisites
    Before getting started, make sure you have the following installed on your system:
@@ -137,20 +138,6 @@ stellar contract invoke \
 - <contract_id> is the deployed contract ID.
 - <function_name> is the function being tested.
 
-## Troubleshooting 🩺:
-### Common Issues and Fixes🤔:
-1. 🦀Rust Installation Issues:
-   - Ensure `cargo` is in your system PATH.
-
-2. 📡Stellar CLI Errors:
-   - Verify the version compatibility of the Stellar CLI.
-   - Use the --help flag to get details of commands:
-   ```bash
-    stellar --help
-   ```
-3. 💸Wallet Connectivity:
-   - Double-check network configuration (testnet/mainnet).
----
 ## Practical Example 👩🏻‍💻:
 
 ### Installation 📦: 
@@ -259,4 +246,18 @@ stellar contract invoke \
 In this example , we learned how to:
   - deploy a contract to Testnet
   - interact with a deployed contract
+
+## Troubleshooting 🩺:
+### Common Issues and Fixes🤔:
+1. 🦀Rust Installation Issues:
+   - Ensure `cargo` is in your system PATH.
+
+2. 📡Stellar CLI Errors:
+   - Verify the version compatibility of the Stellar CLI.
+   - Use the --help flag to get details of commands:
+   ```bash
+    stellar --help
+   ```
+3. 💸Wallet Connectivity:
+   - Double-check network configuration (testnet/mainnet).
 ---
