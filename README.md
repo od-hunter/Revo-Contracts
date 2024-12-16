@@ -1,5 +1,6 @@
+##                                       Revo-Contracts                            
 
-# Maintainers 👨🏻‍🔧:
+# 🛠️ Maintainers 👨🏻‍🔧:
 
 <table align="center">
   <tr>
@@ -16,12 +17,13 @@
 </table>
 
 ## 📖 Table of Contents
-1. 📜[Prerequisites](#prerequisites)
-2. 🖥️[Environment Setup](#environment-setup)
-3. 💳[Wallet Configuration](#wallet-configuration)
-4. 🚀[Compilation and Deployment](#compilation-and-deployment)
-5. 🕵🏻[Testing and Execution](#testing-and-execution)
-6. 🩺[Troubleshooting](#troubleshooting)
+1. 📜 [Prerequisites](#prerequisites)
+2. 🖥️ [Environment Setup](#environment-setup)
+3. 💳 [Wallet Configuration](#wallet-configuration)
+4. 🚀 [Compilation and Deployment](#compilation-and-deployment)
+5. 🕵🏻 [Testing and Execution](#testing-and-execution)
+6. 🩺 [Troubleshooting](#troubleshooting)
+7. 🔩 [Practical Example](#practical-example)
 
 ## 📝 Prerequisites
    Before getting started, make sure you have the following installed on your system:
@@ -33,7 +35,7 @@
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-- ### Windows 🤡:
+- ### Windows 🪟:
   Download [Rust](https://www.rust-lang.org/tools/install) and run `rustup-init.exe`.
 
 - ### Install the wasm32 target:
@@ -58,13 +60,13 @@ brew install stellar-cli
 
 ## Environment Setup 🛠️ :
 
-- 1. Clone the repository 🗂️:
+-  Clone the repository 🗂️:
    ```bash
    git clone https://github.com/<username>/Revo-Contracts.git
    cd ./Revo-Contracts
    ```
 
-- 2. Build Project 👷‍♂️: 
+-  build the smart contract 👷‍♂️: 
    ```bash
    stellar contract build
    ```
@@ -82,45 +84,14 @@ brew install stellar-cli
 ## Compilation and Deployment 🚀 :
 
 ### 1. Build contract 👷‍♂️:
-Once you have fully set up the contract in your local environment, installed all the necessary tools.
-Then first step is to compile the contract and generate the `.wasm` file, 
-which can be done using the following command:
+To build the smart contract, run the following command:
 ```bash
 stellar contract build
 ```
+This command will compile the contract and generate a contract.wasm file in the target/deploy directory.
 
-### 2. Install contract 📄:
-- Before deploying the contract, you must first install it. This means uploading a version of your code to the Stellar network, which you can later use for deployment.
-- When you execute the following command with the parameters specific to your local environment, it will return a hash. You will need to save this hash, as it will be required in the next step.
-
-### macOS/Linux 💿:
-```bash
-stellar contract install \
-   --network <network> \
-   --source <source_account> \
-   --wasm <path_to_wasm_file>
-```
-- ### Windows (PowerShell) 🤡:
-```bash
-stellar contract install `
-   --network <network> `
-   --source <source_account> `
-   --wasm <path_to_wasm_file>
-```
-Where:
-- `<network>` is the name of the network you are working.
-- `<source_account>` is the account from which the installation will be made (you need to provide your own account).
-- `<path_to_wasm_file>` is the path to the `.wasm` file generated when compiling the contract."
-
-Response:
-```
-d36cd70c3b9c999e172ecc4648e616d9a49fd5dbbae8c28bef0b90bbb32fc762
-```
-
-### 3. Deploy contract 🧨:
-- To deploy the contract, use the output of the previous command as this command's input parameter.
-- Executing this command provides a hash, the contract ID. Use it to query platforms like [Stellar Expert](https://stellar.expert/explorer/testnet) and monitor contract interactions.
-
+### 2. Deploy contract 🧨:
+To deploy the smart contract to the Stellar testnet, run the following command:
 - ### macOS/Linux 💿:
 ```bash
 stellar contract deploy \
@@ -128,25 +99,18 @@ stellar contract deploy \
    --source <source_account> \
    --network <network>
 ```
+This command will deploy the contract to the testnet and return the contract's address.
 ### Example💡:
 - Assume the following values :
-   <wasm_hash>: abc123def456ghi789jkl000mnopqr123stuvwx
+   <wasm_hash>: ./target/wasm32-unknown-unknown/release/stellar_smart_contract.wasm \
    <source_account>: GBZXN7PIRZGNWCXXFYU7KYWXX4BXZUYHZO5QUEMKRHLUVLYN53WVFG3E
    <network>: testnet
 
 ```bash   
 stellar contract deploy \
-   --wasm-hash abc123def456ghi789jkl000mnopqr123stuvwx \
+   --wasm ./target/wasm32-unknown-unknown/release/stellar_smart_contract.wasm \
    --source GBZXN7PIRZGNWCXXFYU7KYWXX4BXZUYHZO5QUEMKRHLUVLYN53WVFG3E \
    --network testnet  
-```
-
-- ### Windows 🤡:
-```bash
-stellar contract deploy `
-   --wasm-hash <wasm_hash> `
-   --source <source_account> `
-   --network <network>
 ```
 Where:
 - `<wasm_hash>` is the hash of the `.wasm` file generated during the contract installation.
@@ -154,13 +118,11 @@ Where:
 - `<network>` is the network you are working on (e.g., testnet).
 
 ## Testing and Execution 🔬:
-   After compiling and deploying your smart contracts, follow these steps to test and execute them efficiently:
-   - Unit Tests
-     Use cargo test to validate individual contract functions.
+To run the tests, execute the following command:
    ```bash
    cargo test
    ```
-   - Fix any errors and re-run the tests.
+Fix any errors and re-run the tests.
 
 ### Simulating Transactions 🤖:
 - Simulate contract calls to ensure correctness:
@@ -190,3 +152,111 @@ stellar contract invoke \
 3. 💸Wallet Connectivity:
    - Double-check network configuration (testnet/mainnet).
 ---
+## Practical Example 👩🏻‍💻:
+
+### Installation 📦: 
+Install all [prerequisites](#prerequisites),If not installed. 
+### Create New Project 🎨:
+Create a new project using the init command to create a soroban-hello-world project.
+```bash
+stellar contract init soroban-hello-world
+```
+The init command will create a Rust workspace project structure 🩻:
+```bash
+.
+├── Cargo.lock
+├── Cargo.toml
+├── README.md
+└── contracts
+    └── hello_world
+        ├── Cargo.toml
+        └── src
+            ├── lib.rs
+            └── test.rs
+ ```
+
+- add simple contract in `contracts/hello_world/src/lib.rs` :
+
+```bash
+#![no_std]
+use soroban_sdk::{contract, contractimpl, symbol_short, vec, Env, Symbol, Vec};
+
+#[contract]
+pub struct HelloContract;
+
+#[contractimpl]
+impl HelloContract {
+    pub fn hello(env: Env, to: Symbol) -> Vec<Symbol> {
+        vec![&env, symbol_short!("Hello"), to]
+    }
+}
+
+mod test;
+```
+
+- Add test contract file `contracts/hello_world/src/test.rs`:
+```bash
+#![cfg(test)]
+
+use super::*;
+use soroban_sdk::{symbol_short, vec, Env};
+
+#[test]
+fn test() {
+    let env = Env::default();
+    let contract_id = env.register_contract(None, HelloContract);
+    let client = HelloContractClient::new(&env, &contract_id);
+
+    let words = client.hello(&symbol_short!("Dev"));
+    assert_eq!(
+        words,
+        vec![&env, symbol_short!("Hello"), symbol_short!("Dev"),]
+    );
+}
+```
+### Run the Tests 🕵️:
+Run cargo test and watch the unit test run. You should see the following output:
+
+```bash
+cargo test
+```
+✅
+```bash
+running 1 test
+test test::test ... ok
+```
+### Build the contract 🏗️:
+To build a smart contract to deploy or run, use the stellar contract build command.
+```bash
+stellar contract build
+```
+### Deploy to Testnet 🚀:
+To deploy your HelloWorld contract, run the following command:
+```bash
+stellar contract deploy \
+  --wasm target/wasm32-unknown-unknown/release/hello_world.wasm \
+  --source alice \
+  --network testnet
+  ```
+This returns the contract id `CACDYF3CYMJEJTIVFESQYZTN67GO2R5D5IUABTCUG3HXQSRXCSOROBAN`, so replace it with your actual contract id.
+
+### Interact 🔁:
+run the following command to invoke the hello function.
+
+```bash
+stellar contract invoke \
+  --id CACDYF3CYMJEJTIVFESQYZTN67GO2R5D5IUABTCUG3HXQSRXCSOROBAN \
+  --source alice \
+  --network testnet \
+  -- \
+  hello \
+  --to RPC
+  ```
+  output should appear:
+  ```bash
+  ["Hello", "RPC"]
+  ```
+### Summary 🎯:
+In this example , we learned how to:
+  - deploy a contract to Testnet
+  - interact with a deployed contract
