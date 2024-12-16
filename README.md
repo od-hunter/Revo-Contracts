@@ -1,5 +1,6 @@
 <h1 align="center"> Revo-Contracts</h1>
-# 🛠️ Maintainers 👨🏻‍🔧:
+
+### 🛠️ Maintainers 👨🏻‍🔧:
 <table align="center">
   <tr>
     <td align="center">
