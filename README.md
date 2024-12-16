@@ -1,7 +1,5 @@
-##                                       Revo-Contracts                            
-
+<h1 align="center"> Revo-Contracts</h1>
 # 🛠️ Maintainers 👨🏻‍🔧:
-
 <table align="center">
   <tr>
     <td align="center">
@@ -101,10 +99,10 @@ stellar contract deploy \
 ```
 This command will deploy the contract to the testnet and return the contract's address.
 ### Example💡:
-- Assume the following values :
-   <wasm_hash>: ./target/wasm32-unknown-unknown/release/stellar_smart_contract.wasm \
-   <source_account>: GBZXN7PIRZGNWCXXFYU7KYWXX4BXZUYHZO5QUEMKRHLUVLYN53WVFG3E
-   <network>: testnet
+- Assume the following values:
+  - <wasm_hash>: ./target/wasm32-unknown-unknown/release/stellar_smart_contract.wasm \
+  - <source_account>: GBZXN7PIRZGNWCXXFYU7KYWXX4BXZUYHZO5QUEMKRHLUVLYN53WVFG3E
+  - <network>: testnet
 
 ```bash   
 stellar contract deploy \
@@ -124,7 +122,7 @@ To run the tests, execute the following command:
    ```
 Fix any errors and re-run the tests.
 
-### Simulating Transactions 🤖:
+### Interact with contract 🤖:
 - Simulate contract calls to ensure correctness:
 ```bash
 stellar contract invoke \
@@ -260,3 +258,4 @@ stellar contract invoke \
 In this example , we learned how to:
   - deploy a contract to Testnet
   - interact with a deployed contract
+---
