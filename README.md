@@ -17,15 +17,15 @@
 ### 1. Installing Rust
 
 - ### Linux, macOS, or Unix-like Systems
-      If you're using macOS, Linux, or any other Unix-like system, the simplest method to install Rust is by using `rustup`. Install it with the following command:
+  If you're using macOS, Linux, or any other Unix-like system, the simplest method to install Rust is by using `rustup`. Install it with the following command:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 - ### Windows
-      On Windows, download and run `rustup-init.exe`. You can proceed with the default setup by pressing `Enter`.
-      You can also follow the official Rust guide [here](https://www.rust-lang.org/tools/install).
+  On Windows, download and run `rustup-init.exe`. You can proceed with the default setup by pressing `Enter`.
+  You can also follow the official Rust guide [here](https://www.rust-lang.org/tools/install).
 
 - ### Install the wasm32 target.
        After installing Rust, add the `wasm32-unknown-unknown` target:
@@ -35,7 +35,7 @@ rustup target add wasm32-unknown-unknown
 
 ## 2. Install Stellar CLI
 - There are a few ways to install the [latest released version](https://github.com/stellar/stellar-cli/releases) of Stellar CLI.
--  The toolset installed with Rust allows you to use the `cargo` command in the terminal to install the Stellar CLI.
+- The toolset installed with Rust allows you to use the `cargo` command in the terminal to install the Stellar CLI.
 
 - ### Install with cargo from source:
 ```sh
@@ -52,48 +52,27 @@ brew install stellar-cli
 ### 1. Installing Project
 -  Clone the repository:
    ```bash
-   git clone https://github.com/Crypto-Jaguars/Revo-Contracts.git
+   git clone https://github.com/<username>/Revo-Contracts.git
    cd ./Revo-Contracts
    ```
 
 ### Configuring Smart Contracts
-Stellar smart contracts are written using [Soroban](https://soroban.stellar.org/).
 
-1. Install the Soroban CLI:
+1. To build a smart contract to deploy or run: 
    ```bash
-   cargo install --locked --version <version-number> soroban-cli
+   stellar contract build
    ```
-   > Note: Ensure you have Rust installed. You can install Rust from [Rust Official Site](https://www.rust-lang.org/).
-
-2. Verify Soroban installation:
+2. Run the Tests:
    ```bash
-   soroban --version
+   cargo test
    ```
-3. Initialize Soroban:
-   ```bash
-   soroban config init
-   ```
-4. Configure Stellar CLI for testnet:
-   ```bash
-   stellar keys generate --global alice --network testnet --fund
-   ```
-   Verify the identity with:
-   ```bash
-   stellar keys address alice
-   ```
-
 ---
 
 ## Wallet Configuration
 1. Install the Stellar Wallet (e.g., [Freighter Wallet](https://www.freighter.app/)).
 2. Create a wallet and save the secret keys securely.
 3. Connect the wallet to the Stellar test network.
-   - Update the Soroban configuration to use the testnet:
-     ```bash
-     soroban config set network-url https://horizon-testnet.stellar.org
-     ```
-     ---
-
+   
 ## Compilation and Deployment
 
 ### 1. Build contract
@@ -222,6 +201,3 @@ Let’s walk through deploying a simple smart contract.
    - Double-check network configuration (testnet/mainnet).
 
 ---
-
-## Conclusion
-You are now equipped to set up, deploy, and test smart contracts on Stellar. If you face any issues, refer to the troubleshooting section or the [Stellar Official Guide](https://developers.stellar.org/).
