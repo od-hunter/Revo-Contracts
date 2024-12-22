@@ -1,6 +1,6 @@
-<h1 align="center"> Revo-Contracts</h1>
+<h1 align="center"> Revo Contracts</h1>
 
-### 🛠️ Maintainers 👨🏻‍🔧:
+### 🛠️ Maintainer :
 <table align="center">
   <tr>
     <td align="center">
@@ -76,7 +76,7 @@ brew install stellar-cli
    cargo test
    ```
 
-## Wallet Configuration 🤑 :
+## Wallet Configuration 💳 :
 1. Install the Stellar Wallet (e.g., [Freighter Wallet](https://www.freighter.app/)).
 2. Create a wallet and save the secret keys 🔑 securely.
 3. Connect wallet to the Stellar test network.
@@ -206,7 +206,7 @@ Run cargo test and watch the unit test run. You should see the following output:
 ```bash
 cargo test
 ```
-✅
+
 ```bash
 running 1 test
 test test::test ... ok
