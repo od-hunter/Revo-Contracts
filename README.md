@@ -1,6 +1,6 @@
 <h1 align="center"> Revo Contracts</h1>
 
-### 🛠️ Maintainer :
+<h3 align="center"> 🛠️ Maintainer</h3>
 <table align="center">
   <tr>
     <td align="center">
@@ -17,9 +17,9 @@
 
 ## 📖 Table of Contents
 1. 📜 [Prerequisites](#-prerequisites)
-2. 🖥️ [Environment Setup](#environment-setup-️-)
-3. 💳 [Wallet Configuration](#wallet-configuration--)
-4. 🚀 [Compilation and Deployment](#compilation-and-deployment--)
+2. 🖥️ [Environment Setup](#environment-setup-️)
+3. 💳 [Wallet Configuration](#wallet-configuration-)
+4. 🚀 [Compilation and Deployment](#compilation-and-deployment-)
 5. 🕵🏻 [Testing and Execution](#testing-and-execution-)
 6. 🔩 [Practical Example](#practical-example-)
 7. 🩺 [Troubleshooting](#troubleshooting-)
@@ -29,7 +29,7 @@
    Before getting started, make sure you have the following installed on your system:
 
 ### 1. Installing Rust 🦀:
-- ### For Linux 🐧, macOS 🍎 Systems:
+- ### For Linux 🐧, macOS 🍎 Systems
   If you using macOS, Linux, or any other Unix-like system:
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -38,27 +38,26 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 - ### Windows 🪟:
   Download [Rust](https://www.rust-lang.org/tools/install) and run `rustup-init.exe`.
 
-- ### Install the wasm32 target:
-  After installing Rust, add the `wasm32-unknown-unknown` target:
-```bash
-rustup target add wasm32-unknown-unknown
-```
+    - #### Install the wasm32 target:
+      After installing Rust, add the `wasm32-unknown-unknown` target:
+    ```bash
+    rustup target add wasm32-unknown-unknown
+    ```
+### 2. Install Stellar CLI 📡:
+1. There are a few ways to install the [latest version](https://github.com/stellar/stellar-cli/releases) of Stellar CLI.
+2. Rust allows you to use `cargo` command in the terminal to install the Stellar CLI.
 
-## 2. Install Stellar CLI 📡:
-- There are a few ways to install the [latest version](https://github.com/stellar/stellar-cli/releases) of Stellar CLI.
-- Rust allows you to use `cargo` command in the terminal to install the Stellar CLI.
-
-- ### Install with cargo 📦:
+- #### Install with cargo 📦:
 ```sh
 cargo install --locked stellar-cli --features opt
 ```
 
-- ### Install with Homebrew (macOS, Linux):
+- #### Install with Homebrew (macOS, Linux):
 ```sh
 brew install stellar-cli
 ```
 
-## Environment Setup 🛠️ :
+## Environment Setup 🛠️
 
 -  Clone the repository 🗂️:
    ```bash
@@ -76,12 +75,12 @@ brew install stellar-cli
    cargo test
    ```
 
-## Wallet Configuration 💳 :
+## Wallet Configuration 💳
 1. Install the Stellar Wallet (e.g., [Freighter Wallet](https://www.freighter.app/)).
 2. Create a wallet and save the secret keys 🔑 securely.
 3. Connect wallet to the Stellar test network.
    
-## Compilation and Deployment 🚀 :
+## Compilation and Deployment 🚀
 
 ### 1. Build contract 👷‍♂️:
 To build the smart contract, run the following command:
@@ -117,7 +116,7 @@ Where:
 - `<source_account>` is the account from which the deployment will be made.
 - `<network>` is the network you are working on (e.g., testnet).
 
-## Testing and Execution 🔬:
+## Testing and Execution 🔬
 To run the tests, execute the following command:
    ```bash
    cargo test
@@ -138,7 +137,7 @@ stellar contract invoke \
 - <contract_id> is the deployed contract ID.
 - <function_name> is the function being tested.
 
-## Practical Example 👩🏻‍💻:
+## Practical Example 👩🏻‍💻
 
 ### Installation 📦: 
 Install all [prerequisites](#prerequisites),If not installed. 
@@ -242,7 +241,7 @@ stellar contract invoke \
   ```bash
   ["Hello", "RPC"]
   ```
-### Summary 🎯:
+### Summary 🎯
 In this example , we learned how to:
   - deploy a contract to Testnet
   - interact with a deployed contract
@@ -261,3 +260,5 @@ In this example , we learned how to:
 3. 💸Wallet Connectivity:
    - Double-check network configuration (testnet/mainnet).
 ---
+
+##### **By following this guide, you should be able to set up your environment and deploy a basic Smart Contract using Stellar. Always refer to the official Stellar documentation for the most up-to-date information and best practices**
