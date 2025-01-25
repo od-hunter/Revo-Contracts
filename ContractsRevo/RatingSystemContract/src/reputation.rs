@@ -12,11 +12,11 @@ pub struct ReputationRecord {
 pub fn reputation_score_calculate(env: Env, seller: Address) -> u32 {
     let weighted_rating = crate::rating::calculate_weighted_rating(env, seller);
     match weighted_rating {
-        0.0..=1.0 => 1,
-        2.0..=2.0 => 2,
-        3.0..=3.0 => 3,
-        4.0..=4.0 => 4,
-        _ => 5,
+      0.0..=1.0 => 1,  
+      1.0..=2.0 => 2,  
+      2.0..=3.0 => 3,  
+      3.0..=4.0 => 4,  
+      _ => 5,    
     }
 }
 
