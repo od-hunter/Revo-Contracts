@@ -1,9 +1,9 @@
 [workspace]
 members = [
-    "ContrctsRevo/ExampleContract",
-    "ContrctsRevo/PurchaseReviewContract",
-    "ContrctsRevo/RatingSystemContract",
-    "ContrctsRevo/TransactionNFTContract",
+    "ContractsRevo/ExampleContract",
+    "ContractsRevo/PurchaseReviewContract",
+    "ContractsRevo/rating-system-contract",
+    "ContractsRevo/TransactionNFTContract",
 ]
 
 [workspace.dependencies]
