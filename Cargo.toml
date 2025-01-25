@@ -2,7 +2,7 @@
 members = [
     "ContractsRevo/ExampleContract",
     "ContractsRevo/PurchaseReviewContract",
-    "ContractsRevo/RatingSystemContract",
+    "ContractsRevo/rating-system-contract",
     "ContractsRevo/TransactionNFTContract",
 ]
 
