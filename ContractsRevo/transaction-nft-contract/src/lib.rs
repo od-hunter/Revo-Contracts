@@ -15,10 +15,14 @@ impl TransactionNFTContract {
             panic!("Buyer and seller cannot be the same address");
         }
 
-        let product_bytes: soroban_sdk::Bytes = product.clone().into();
-        let tx_id = proof::generate_transaction_proof(env.clone(), buyer.clone(), seller.clone(), amount, product_bytes);
+        // Require authorization from both buyer and seller
+        buyer.require_auth();
+        seller.require_auth();
 
-        mint::mint_nft(&env, &buyer, tx_id.clone(), &seller, amount, &product);
+        let product_bytes: soroban_sdk::Bytes = product.clone().into();
+        let tx_id = proof::generate_transaction_proof(env.clone(), buyer, seller, amount, product_bytes);
+
+        mint::mint_nft(&env, &buyer, tx_id, &seller, amount, &product);
 
         tx_id
     }
