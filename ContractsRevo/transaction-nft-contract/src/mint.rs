@@ -10,15 +10,6 @@ pub struct NFTMetadata {
 }
 
 pub fn mint_nft(env: &Env, buyer: &Address, tx_id: BytesN<32>, seller: &Address, amount: u64, product: &BytesN<32>) {
-    // Check if NFT already exists
-    if env.storage().instance().has(&tx_id) {
-        panic!("NFT already exists for this transaction");
-    }
-
-    // Validate amount (must be greater than zero)
-    if amount == 0 {
-        panic!("Amount must be greater than zero");
-    }
 
     // Fetch the ledger timestamp
     let timestamp = env.ledger().timestamp();
