@@ -15,12 +15,19 @@ pub fn mint_nft(env: &Env, buyer: &Address, tx_id: BytesN<32>, seller: &Address,
         panic!("NFT already exists for this transaction");
     }
 
-    // Validate amount
+    // Validate amount (must be greater than zero)
     if amount == 0 {
         panic!("Amount must be greater than zero");
     }
 
+    // Fetch the ledger timestamp
     let timestamp = env.ledger().timestamp();
+
+    // Validate timestamp (ensure it's a valid nonzero timestamp)
+    if timestamp == 0 {
+        panic!("Invalid ledger timestamp");
+    }
+
     let metadata = NFTMetadata {
         buyer: buyer.clone(),
         seller: seller.clone(),
@@ -33,7 +40,6 @@ pub fn mint_nft(env: &Env, buyer: &Address, tx_id: BytesN<32>, seller: &Address,
     env.storage().instance().set(&tx_id, &metadata);
 
     // Emit an event for tracking the mint operation
-    // Limit sensitive data in public events
     env.events().publish(
         (Symbol::new(env, "nft_minted"), tx_id.clone()),  // Event key
         tx_id.clone(),  // Event data limited to tx_id only
