@@ -9,8 +9,14 @@ pub struct NFTMetadata {
     pub timestamp: u64,
 }
 
-pub fn mint_nft(env: &Env, buyer: &Address, tx_id: BytesN<32>, seller: &Address, amount: u64, product: &BytesN<32>) {
-
+pub fn mint_nft(
+    env: &Env,
+    buyer: &Address,
+    tx_id: BytesN<32>,
+    seller: &Address,
+    amount: u64,
+    product: &BytesN<32>,
+) {
     // Fetch the ledger timestamp
     let timestamp = env.ledger().timestamp();
 
@@ -32,7 +38,7 @@ pub fn mint_nft(env: &Env, buyer: &Address, tx_id: BytesN<32>, seller: &Address,
 
     // Emit an event for tracking the mint operation
     env.events().publish(
-        (Symbol::new(env, "nft_minted"), tx_id.clone()),  // Event key
-        tx_id.clone(),  // Event data limited to tx_id only
+        (Symbol::new(env, "nft_minted"), tx_id.clone()), // Event key
+        tx_id.clone(),                                   // Event data limited to tx_id only
     );
 }
