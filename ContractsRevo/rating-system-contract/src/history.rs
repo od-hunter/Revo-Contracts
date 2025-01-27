@@ -13,6 +13,6 @@ pub fn _get_rating_history(env: Env, seller: &Address) -> Result<Vec<Rating>, Er
 pub fn get_reputation_history(env: Env, seller: Address) -> Result<Vec<ReputationRecord>, Error> {
     match env.storage().instance().get(&seller) {
         Some(reputation_record) => Ok(reputation_record),
-        None => Err(Error::ReputaionHistoryNotFound),
+        None => Err(Error::ReputationHistoryNotFound),
     }
 }
