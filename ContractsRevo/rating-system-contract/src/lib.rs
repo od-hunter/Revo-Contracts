@@ -1,5 +1,5 @@
 #![no_std]
-use soroban_sdk::{contract, contractimpl, Address, Env, String, Symbol};
+use soroban_sdk::{contract, contractimpl, contracttype, Address, Env, String, Symbol};
 
 use rating::{rate_seller_system, update_weighted_rating};
 use reputation::{add_reputation_score_history, reputation_score_calculate};
@@ -12,6 +12,12 @@ mod test;
 
 #[contract]
 pub struct RatingSytemContract;
+
+#[contracttype]
+pub enum DataKey {
+    Rating(Address),
+    WeightedRating(Address)
+}
 
 #[contractimpl]
 impl RatingSytemContract {
