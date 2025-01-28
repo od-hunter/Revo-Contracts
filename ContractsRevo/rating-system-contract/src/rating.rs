@@ -1,5 +1,5 @@
-use soroban_sdk::{contracttype, Address, Env, String, Symbol, Vec};
 use crate::DataKey;
+use soroban_sdk::{contracttype, Address, Env, String, Symbol, Vec};
 // use crate::datatypes::{Error};
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -88,11 +88,11 @@ pub fn update_weighted_rating(env: Env, seller: Address, rating: u32, weight: u3
 pub fn calculate_weighted_rating(env: Env, seller: Address) -> f32 {
     let key = DataKey::WeightedRating(seller.clone());
     // Fetch existing total weighted rating and total weight or initialize to zero
-    let (total_weighted_rating, total_weight): (u32, u32) =
-        match env.storage().instance().get(&key) {
-            Some((x, y)) => (x, y),
-            None => (0, 0),
-        };
+    let (total_weighted_rating, total_weight): (u32, u32) = match env.storage().instance().get(&key)
+    {
+        Some((x, y)) => (x, y),
+        None => (0, 0),
+    };
 
     // ensure there are ratings to calculate
     if total_weight == 0 {

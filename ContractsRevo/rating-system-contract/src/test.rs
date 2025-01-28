@@ -1,7 +1,7 @@
 #![cfg(test)]
 
-use crate::{rating::Rating, reputation::ReputationRecord};
 use super::*;
+use crate::{rating::Rating, reputation::ReputationRecord};
 use soroban_sdk::{testutils::Address as TestAddress, Env, Vec};
 
 #[test]
@@ -11,7 +11,7 @@ fn test_rate_seller_panic_same_buyer_seller() {
     let contract_id = env.register(RatingSytemContract, ());
     let client = RatingSytemContractClient::new(&env, &contract_id);
     let seller_address = <Address>::generate(&env);
-    let rating = 3u32;  
+    let rating = 3u32;
     let weight = 2u32;
 
     client.rate_seller(&seller_address, &seller_address, &rating, &weight, &None);
@@ -24,7 +24,7 @@ fn test_rate_seller_panic_rating_out_of_range() {
     let contract_id = env.register(RatingSytemContract, ());
     let client = RatingSytemContractClient::new(&env, &contract_id);
     let seller_address = <Address>::generate(&env);
-    let buyer_address = <Address>::generate(&env);  
+    let buyer_address = <Address>::generate(&env);
     let weight = 2u32;
 
     client.rate_seller(&seller_address, &buyer_address, &10, &weight, &None);
@@ -36,9 +36,9 @@ fn test_rate_seller() {
     let contract_id = env.register(RatingSytemContract, ());
     let client = RatingSytemContractClient::new(&env, &contract_id);
     let seller_address = <Address>::generate(&env);
-    let buyer_address = <Address>::generate(&env);  
-    let rating = 3u32;  
-    let weight = 2u32;  
+    let buyer_address = <Address>::generate(&env);
+    let rating = 3u32;
+    let weight = 2u32;
     let weighted_key = DataKey::WeightedRating(seller_address.clone());
     let rating_key = DataKey::Rating(seller_address.clone());
 
@@ -73,34 +73,41 @@ fn test_rate_seller() {
 
     // First rating submission
     client.rate_seller(&seller_address, &buyer_address, &rating, &weight, &None);
-    assert_storage(&env, &contract_id, &weighted_key, &rating_key, 1, rating * weight, weight);
+    assert_storage(
+        &env,
+        &contract_id,
+        &weighted_key,
+        &rating_key,
+        1,
+        rating * weight,
+        weight,
+    );
 
-   // Second and third ratings by the same buyer
-   client.rate_seller(&seller_address, &buyer_address, &rating, &weight, &None);
-   client.rate_seller(&seller_address, &buyer_address, &rating, &weight, &None);
-   assert_storage(
-       &env,
-       &contract_id,
-       &weighted_key,
-       &rating_key,
-       3,
-       (rating * weight) * 3,
-       weight * 3,
-   );
+    // Second and third ratings by the same buyer
+    client.rate_seller(&seller_address, &buyer_address, &rating, &weight, &None);
+    client.rate_seller(&seller_address, &buyer_address, &rating, &weight, &None);
+    assert_storage(
+        &env,
+        &contract_id,
+        &weighted_key,
+        &rating_key,
+        3,
+        (rating * weight) * 3,
+        weight * 3,
+    );
 
-   // Edge case: Rating with zero weight
-   client.rate_seller(&seller_address, &buyer_address, &rating, &0, &None);
-   assert_storage(
-       &env,
-       &contract_id,
-       &weighted_key,
-       &rating_key,
-       4,
-       (rating * weight) * 3,
-       weight * 3,
-   );
+    // Edge case: Rating with zero weight
+    client.rate_seller(&seller_address, &buyer_address, &rating, &0, &None);
+    assert_storage(
+        &env,
+        &contract_id,
+        &weighted_key,
+        &rating_key,
+        4,
+        (rating * weight) * 3,
+        weight * 3,
+    );
 }
-
 
 #[test]
 #[should_panic(expected = "No rating available")]
@@ -119,10 +126,10 @@ fn test_seller_reputation_score() {
     let contract_id = env.register(RatingSytemContract, ());
     let client = RatingSytemContractClient::new(&env, &contract_id);
     let seller_address = <Address>::generate(&env);
-    let buyer_address = <Address>::generate(&env);  
+    let buyer_address = <Address>::generate(&env);
     let reputation_history_key = DataKey::ReputationHistory(seller_address.clone());
     let weight = 2u32;
-    
+
     // First rating submission
     client.rate_seller(&seller_address, &buyer_address, &5, &weight, &None);
 
@@ -139,14 +146,14 @@ fn test_seller_reputation_score() {
                 .instance()
                 .get(reputation_history_key)
                 .expect("Reputation history key rating key not found");
-            
+
             assert_eq!(reputation_records.len(), expected_reputation_records);
         });
     }
 
     let reputation_score = client.seller_reputation_score(&seller_address);
     assert_eq!(reputation_score, 5);
-    assert_storage(&env, &contract_id, &reputation_history_key,   1);
+    assert_storage(&env, &contract_id, &reputation_history_key, 1);
 
     // Second and Third rating submission
     client.rate_seller(&seller_address, &buyer_address, &3, &weight, &None);

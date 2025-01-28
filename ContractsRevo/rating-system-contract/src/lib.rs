@@ -17,7 +17,7 @@ pub struct RatingSytemContract;
 pub enum DataKey {
     Rating(Address),
     WeightedRating(Address),
-    ReputationHistory(Address)
+    ReputationHistory(Address),
 }
 
 #[contractimpl]
