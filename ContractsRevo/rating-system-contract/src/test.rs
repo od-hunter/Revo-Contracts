@@ -8,8 +8,8 @@ use soroban_sdk::{testutils::Address as TestAddress, Env, Vec};
 #[should_panic(expected = "Buyer and seller cannot be the same address")]
 fn test_rate_seller_panic_same_buyer_seller() {
     let env = Env::default();
-    let contract_id = env.register(RatingSytemContract, ());
-    let client = RatingSytemContractClient::new(&env, &contract_id);
+    let contract_id = env.register(RatingSystemContract, ());
+    let client = RatingSystemContractClient::new(&env, &contract_id);
     let seller_address = <Address>::generate(&env);
     let rating = 3u32;
     let weight = 2u32;
@@ -21,8 +21,8 @@ fn test_rate_seller_panic_same_buyer_seller() {
 #[should_panic(expected = "Rating must be between 1 and 5")]
 fn test_rate_seller_panic_rating_out_of_range() {
     let env = Env::default();
-    let contract_id = env.register(RatingSytemContract, ());
-    let client = RatingSytemContractClient::new(&env, &contract_id);
+    let contract_id = env.register(RatingSystemContract, ());
+    let client = RatingSystemContractClient::new(&env, &contract_id);
     let seller_address = <Address>::generate(&env);
     let buyer_address = <Address>::generate(&env);
     let weight = 2u32;
@@ -33,8 +33,8 @@ fn test_rate_seller_panic_rating_out_of_range() {
 #[test]
 fn test_rate_seller() {
     let env = Env::default();
-    let contract_id = env.register(RatingSytemContract, ());
-    let client = RatingSytemContractClient::new(&env, &contract_id);
+    let contract_id = env.register(RatingSystemContract, ());
+    let client = RatingSystemContractClient::new(&env, &contract_id);
     let seller_address = <Address>::generate(&env);
     let buyer_address = <Address>::generate(&env);
     let rating = 3u32;
@@ -113,8 +113,8 @@ fn test_rate_seller() {
 #[should_panic(expected = "No rating available")]
 fn test_seller_reputation_score_panic_rating_no_available() {
     let env = Env::default();
-    let contract_id = env.register(RatingSytemContract, ());
-    let client = RatingSytemContractClient::new(&env, &contract_id);
+    let contract_id = env.register(RatingSystemContract, ());
+    let client = RatingSystemContractClient::new(&env, &contract_id);
     let seller_address = <Address>::generate(&env);
 
     client.seller_reputation_score(&seller_address);
@@ -123,8 +123,8 @@ fn test_seller_reputation_score_panic_rating_no_available() {
 #[test]
 fn test_seller_reputation_score() {
     let env = Env::default();
-    let contract_id = env.register(RatingSytemContract, ());
-    let client = RatingSytemContractClient::new(&env, &contract_id);
+    let contract_id = env.register(RatingSystemContract, ());
+    let client = RatingSystemContractClient::new(&env, &contract_id);
     let seller_address = <Address>::generate(&env);
     let buyer_address = <Address>::generate(&env);
     let reputation_history_key = DataKey::ReputationHistory(seller_address.clone());

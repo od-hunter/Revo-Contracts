@@ -11,7 +11,7 @@ mod reputation;
 mod test;
 
 #[contract]
-pub struct RatingSytemContract;
+pub struct RatingSystemContract;
 
 #[contracttype]
 pub enum DataKey {
@@ -21,7 +21,7 @@ pub enum DataKey {
 }
 
 #[contractimpl]
-impl RatingSytemContract {
+impl RatingSystemContract {
     // Function to allow a buyer to rate a seller
     pub fn rate_seller(
         env: Env,
