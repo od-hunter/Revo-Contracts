@@ -58,11 +58,12 @@ pub fn rate_seller_system(
 // update the seller weighted rating
 pub fn update_weighted_rating(env: Env, seller: Address, rating: u32, weight: u32) {
     // Fetch existing weighted rating and total weight or initialize to zero
-    let (mut total_weighted_rating, mut total_weight): (u32, u32) =
-        match env.storage().instance().get(&seller) {
-            Some((x, y)) => (x, y),
-            None => (0, 0),
-        };
+    let ratings: Vec<Rating> = env.storage().instance().get(&seller).unwrap();
+    if ratings.iter().count() == 1 {
+        env.storage().instance().set(&seller, &(0u32, 0u32))
+    }
+
+    let (mut total_weighted_rating, mut total_weight): (u32, u32)= env.storage().instance().get(&seller).unwrap();
 
     // Update total weighted rating and weight
     total_weighted_rating += rating * weight;
