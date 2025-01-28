@@ -123,6 +123,7 @@ fn test_seller_reputation_score() {
     let reputation_history_key = DataKey::ReputationHistory(seller_address.clone());
     let weight = 2u32;
     
+    // First rating submission
     client.rate_seller(&seller_address, &buyer_address, &5, &weight, &None);
 
     // Helper function to verify storage
@@ -146,4 +147,12 @@ fn test_seller_reputation_score() {
     let reputation_score = client.seller_reputation_score(&seller_address);
     assert_eq!(reputation_score, 5);
     assert_storage(&env, &contract_id, &reputation_history_key,   1);
+
+    // Second and Third rating submission
+    client.rate_seller(&seller_address, &buyer_address, &3, &weight, &None);
+    client.rate_seller(&seller_address, &buyer_address, &2, &weight, &None);
+
+    let reputation_score = client.seller_reputation_score(&seller_address);
+    assert_eq!(reputation_score, 3);
+    assert_storage(&env, &contract_id, &reputation_history_key, 2);
 }
