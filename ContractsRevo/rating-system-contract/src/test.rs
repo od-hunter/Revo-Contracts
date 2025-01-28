@@ -1,6 +1,6 @@
 #![cfg(test)]
 
-use crate::rating::Rating;
+use crate::{rating::Rating, reputation::ReputationRecord};
 use super::*;
 use soroban_sdk::{testutils::Address as TestAddress, Env, Vec};
 
@@ -49,7 +49,7 @@ fn test_rate_seller() {
         weighted_key: &DataKey,
         rating_key: &DataKey,
         expected_ratings: u32,
-        expected_weighted_rating: u32,
+        expected_total_weighted_rating: u32,
         expected_total_weight: u32,
     ) {
         env.as_contract(contract_id, || {
@@ -66,7 +66,7 @@ fn test_rate_seller() {
                 .expect("Rating key not found");
 
             assert_eq!(ratings.len(), expected_ratings);
-            assert_eq!(total_weighted_rating, expected_weighted_rating);
+            assert_eq!(total_weighted_rating, expected_total_weighted_rating);
             assert_eq!(total_weight, expected_total_weight);
         });
     }
@@ -101,3 +101,49 @@ fn test_rate_seller() {
    );
 }
 
+
+#[test]
+#[should_panic(expected = "No rating available")]
+fn test_seller_reputation_score_panic_rating_no_available() {
+    let env = Env::default();
+    let contract_id = env.register(RatingSytemContract, ());
+    let client = RatingSytemContractClient::new(&env, &contract_id);
+    let seller_address = <Address>::generate(&env);
+
+    client.seller_reputation_score(&seller_address);
+}
+
+#[test]
+fn test_seller_reputation_score() {
+    let env = Env::default();
+    let contract_id = env.register(RatingSytemContract, ());
+    let client = RatingSytemContractClient::new(&env, &contract_id);
+    let seller_address = <Address>::generate(&env);
+    let buyer_address = <Address>::generate(&env);  
+    let reputation_history_key = DataKey::ReputationHistory(seller_address.clone());
+    let weight = 2u32;
+    
+    client.rate_seller(&seller_address, &buyer_address, &5, &weight, &None);
+
+    // Helper function to verify storage
+    fn assert_storage(
+        env: &Env,
+        contract_id: &Address,
+        reputation_history_key: &DataKey,
+        expected_reputation_records: u32,
+    ) {
+        env.as_contract(contract_id, || {
+            let reputation_records: Vec<ReputationRecord> = env
+                .storage()
+                .instance()
+                .get(reputation_history_key)
+                .expect("Reputation history key rating key not found");
+            
+            assert_eq!(reputation_records.len(), expected_reputation_records);
+        });
+    }
+
+    let reputation_score = client.seller_reputation_score(&seller_address);
+    assert_eq!(reputation_score, 5);
+    assert_storage(&env, &contract_id, &reputation_history_key,   1);
+}
