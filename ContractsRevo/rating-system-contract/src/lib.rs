@@ -16,7 +16,8 @@ pub struct RatingSytemContract;
 #[contracttype]
 pub enum DataKey {
     Rating(Address),
-    WeightedRating(Address)
+    WeightedRating(Address),
+    ReputationHistory(Address)
 }
 
 #[contractimpl]
@@ -62,7 +63,7 @@ impl RatingSytemContract {
     pub fn seller_reputation_score(env: Env, seller: Address) -> u32 {
         // Validate seller address
         if seller.to_string().len() == 0 {
-            panic!("seller address is invalid");
+            panic!("Seller address is invalid");
         }
         // calculate seller reputation score
         let reputation_score = reputation_score_calculate(env.clone(), seller.clone());
