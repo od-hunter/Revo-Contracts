@@ -10,9 +10,14 @@ use soroban_sdk::{
 #[test]
 fn test_metadata_attachment() {
     let env = Env::default();
+
     env.mock_all_auths();
 
-    env.ledger().set_timestamp(123456789);
+    let current_time = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_secs();
+    env.ledger().set_timestamp(current_time);
 
     let contract_id = env.register(TransactionNFTContract, ());
     let client = TransactionNFTContractClient::new(&env, &contract_id);
@@ -20,7 +25,7 @@ fn test_metadata_attachment() {
     let buyer = Address::generate(&env);
     let seller = Address::generate(&env);
     let amount = 100;
-    let product = BytesN::from_array(&env, &[0; 32]);
+    let product = BytesN::from_array(&env, &[15; 32]);
 
     // Mint the NFT
     let tx_id = client.mint_nft(&buyer, &seller, &amount, &product);
@@ -57,6 +62,13 @@ fn test_metadata_attachment() {
     // Retrieve the metadata
     let metadata = client.get_nft_metadata(&tx_id).unwrap();
 
+    // Verify metadata structure
+    assert!(
+        !metadata.product.is_empty(),
+        "Product data should not be empty"
+    );
+    assert!(metadata.amount > 0, "Amount should be positive");
+
     // Verify purchase details storage
     assert_eq!(metadata.amount, amount);
     assert_eq!(metadata.product, product);
@@ -65,8 +77,8 @@ fn test_metadata_attachment() {
     assert_eq!(metadata.buyer, buyer);
     assert_eq!(metadata.seller, seller);
 
-    // Validate data completeness
-    assert!(metadata.timestamp > 0);
+    // Ensure timestamp is after contract deployment
+    assert!(metadata.timestamp >= env.ledger().timestamp());
 }
 
 // #[test]
