@@ -1,7 +1,11 @@
 #![cfg(test)]
 extern crate std;
 use super::*;
-use soroban_sdk::{testutils::{Address as _,Ledger, AuthorizedFunction, AuthorizedInvocation},IntoVal,symbol_short, Address, BytesN, Env};
+use soroban_sdk::{
+    symbol_short,
+    testutils::{Address as _, AuthorizedFunction, AuthorizedInvocation, Ledger},
+    Address, BytesN, Env, IntoVal,
+};
 
 #[test]
 fn test_metadata_attachment() {
@@ -13,8 +17,8 @@ fn test_metadata_attachment() {
     let contract_id = env.register(TransactionNFTContract, ());
     let client = TransactionNFTContractClient::new(&env, &contract_id);
 
-    let buyer =  Address::generate(&env);
-    let seller =  Address::generate(&env);
+    let buyer = Address::generate(&env);
+    let seller = Address::generate(&env);
     let amount = 100;
     let product = BytesN::from_array(&env, &[0; 32]);
 
