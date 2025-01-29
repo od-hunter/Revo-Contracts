@@ -55,4 +55,3 @@ impl TransactionNFTContract {
     }
 }
 
-mod test;

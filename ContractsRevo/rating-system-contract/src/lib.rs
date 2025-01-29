@@ -64,9 +64,12 @@ impl RatingSystemContract {
         // Validate seller address
         if seller.to_string().is_empty() {
             panic!("seller address is invalid");
-        if seller.to_string().len() == 0 {
-            panic!("Seller address is invalid");
         }
+        // This check is redundant since isEmpty() already checks for length 0
+        // if seller.to_string().len() == 0 {
+        //     panic!("Seller address is invalid");
+        // }
+    
         // calculate seller reputation score
         let reputation_score = reputation_score_calculate(env.clone(), seller.clone());
         add_reputation_score_history(env.clone(), seller.clone(), reputation_score);
