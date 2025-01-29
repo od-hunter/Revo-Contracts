@@ -1,5 +1,5 @@
 #![no_std]
-use soroban_sdk::{contract, contractimpl, Address, Env, String, Symbol};
+use soroban_sdk::{contract, contractimpl, contracttype, Address, Env, String, Symbol};
 
 use rating::{rate_seller_system, update_weighted_rating};
 use reputation::{add_reputation_score_history, reputation_score_calculate};
@@ -11,10 +11,17 @@ mod reputation;
 mod test;
 
 #[contract]
-pub struct RatingSytemContract;
+pub struct RatingSystemContract;
+
+#[contracttype]
+pub enum DataKey {
+    Rating(Address),
+    WeightedRating(Address),
+    ReputationHistory(Address),
+}
 
 #[contractimpl]
-impl RatingSytemContract {
+impl RatingSystemContract {
     // Function to allow a buyer to rate a seller
     pub fn rate_seller(
         env: Env,
@@ -56,7 +63,7 @@ impl RatingSytemContract {
     pub fn seller_reputation_score(env: Env, seller: Address) -> u32 {
         // Validate seller address
         if seller.to_string().len() == 0 {
-            panic!("seller address is invalid");
+            panic!("Seller address is invalid");
         }
         // calculate seller reputation score
         let reputation_score = reputation_score_calculate(env.clone(), seller.clone());
