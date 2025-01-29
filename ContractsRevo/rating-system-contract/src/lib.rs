@@ -62,10 +62,10 @@ impl RatingSystemContract {
     // function to calculate and update seller's reputation score data
     pub fn seller_reputation_score(env: Env, seller: Address) -> u32 {
         // Validate seller address
-        if seller.to_string().len() == 0 {
-            panic!("Seller address is invalid");
         if seller.to_string().is_empty() {
             panic!("seller address is invalid");
+        if seller.to_string().len() == 0 {
+            panic!("Seller address is invalid");
         }
         // calculate seller reputation score
         let reputation_score = reputation_score_calculate(env.clone(), seller.clone());
